@@ -48,6 +48,15 @@ export async function getcandidateProfile() {
     }    
 }
 
+export async function analyzeCandidateProfile() {
+  try {
+    const response = await api.post("/candidate/profile/analyze");
+    return response.data;
+  } catch (error) {
+    console.log(error.response);
+    return error.response.data;
+  }
+}
 export async function updateCandidateProfile(profile) {
     
     try {

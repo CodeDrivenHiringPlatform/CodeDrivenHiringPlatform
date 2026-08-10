@@ -19,6 +19,16 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
 
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMaxUploadSizeExceeded(MaxUploadSizeExceededException ex) {
+        ApiResponse<Void> response = new ApiResponse<>(
+                false,
+                "File too large. Maximum upload size exceeded.",
+                null
+        );
+        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(response);
+    }
+
     @ExceptionHandler(UserException.class)
     public ResponseEntity<ApiResponse<Void>> handleRuntimeException(UserException ex) {
         ApiResponse<Void> response = new ApiResponse<>(
@@ -29,7 +39,25 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
-    
+    @ExceptionHandler(CodeException.class)
+    public ResponseEntity<ApiResponse<Void>> handleRuntimeException(CodeException ex) {
+        ApiResponse<Void> response = new ApiResponse<>(
+                false,
+                ex.getMessage(),
+                null
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(ContestException.class)
+    public ResponseEntity<ApiResponse<Void>> handleContestException(ContestException ex) {
+        ApiResponse<Void> response = new ApiResponse<>(
+                false,
+                ex.getMessage(),
+                null
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
 
     public ResponseEntity<ApiResponse<Map<String, String>>> handleValidationException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();

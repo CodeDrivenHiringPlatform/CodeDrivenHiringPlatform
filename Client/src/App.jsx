@@ -5,7 +5,9 @@ import Home from './pages/Home'
 import { Toaster } from 'sonner'
 import ProtectedRoute from './auth/ProtectedRoute'
 import AuthRoute from './auth/AuthRoute'
-
+import Contest from './pages/Contest'
+import ContestTest from './pages/ContestTest'
+import ContestDetails from './pages/ContestDetails'
 
 function App() {
 
@@ -25,11 +27,31 @@ function App() {
           </AuthRoute>
         } />
 
+
         <Route path='/home' element={
           <ProtectedRoute allowedRoles={["ROLE_CANDIDATE"]}>
             <Home />
           </ProtectedRoute>
         } />
+
+         <Route path='/contests' element={
+          <ProtectedRoute allowedRoles={["ROLE_CANDIDATE"]}>
+            <Contest />
+          </ProtectedRoute>
+        } />
+
+        <Route path='/contest/:id' element={
+          <ProtectedRoute allowedRoles={["ROLE_CANDIDATE"]}>
+            <ContestDetails />
+          </ProtectedRoute>
+        } />
+
+        <Route path='/contest/:id/test' element={
+          <ProtectedRoute allowedRoles={["ROLE_CANDIDATE"]}>
+            <ContestTest />
+          </ProtectedRoute>
+        } />
+
 
         <Route path='/*' element={<h2>No route present</h2>} />
 

@@ -5,9 +5,11 @@ import Home from './pages/Home'
 import { Toaster } from 'sonner'
 import ProtectedRoute from './auth/ProtectedRoute'
 import AuthRoute from './auth/AuthRoute'
+import Problems from './pages/Problems'
+import CodePage from './pages/CodePage'
 import Contest from './pages/Contest'
 import ContestTest from './pages/ContestTest'
-import ContestDetails from './pages/ContestDetails'
+
 
 function App() {
 
@@ -49,6 +51,18 @@ function App() {
         <Route path='/contest/:id/test' element={
           <ProtectedRoute allowedRoles={["ROLE_CANDIDATE"]}>
             <ContestTest />
+          </ProtectedRoute>
+        } />
+
+        <Route path='/problems' element={
+          <ProtectedRoute allowedRoles={["ROLE_CANDIDATE"]}>
+            <Problems />
+          </ProtectedRoute>
+        } />
+
+        <Route path='/problem/:problemId' element={
+          <ProtectedRoute allowedRoles={["ROLE_CANDIDATE"]}>
+            <CodePage />
           </ProtectedRoute>
         } />
 
